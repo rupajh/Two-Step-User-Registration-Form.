@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, CircularProgress } from '@material-ui/core';
+import { TextField,  MenuItem, FormHelperText,  } from '@material-ui/core';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { addUser } from '../store/actions/userActions';
-import { Resolver } from 'react-hook-form';
 import { ValidationError } from 'yup';
 import FormCard from './FormCard';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +25,6 @@ interface FormValues {
   pincode?: string;
 }
 
-// Define resolver function for form validation
 const resolver = async (values: FormValues) => {
   try {
     await schema.validate(values, { abortEarly: false });
@@ -45,11 +41,10 @@ const resolver = async (values: FormValues) => {
         }, {}),
       };
     } else {
-      // Handle other types of errors
       console.error('Validation error:', errors);
       return {
         values: {},
-        errors: { general: 'An error occurred during validation.' }, // Generic error message
+        errors: { general: 'An error occurred during validation.' }, 
       };
     }
   }
@@ -85,7 +80,6 @@ const Step2Form: React.FC<Step2FormProps> = ({ handleStep2Submit }) => {
     name: string;
     capital: string;
     population: number;
-    // Add more properties as needed
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +87,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ handleStep2Submit }) => {
     setValue('country', event.target.value);
   };
   useEffect(() => {
-    if (inputValue.trim() !== '') { // Only fetch data if input value is not empty
+    if (inputValue.trim() !== '') { 
       setLoading(true);
       fetch(`https://restcountries.com/v3.1/name/${inputValue}`)
         .then((res) => res.json())
@@ -107,7 +101,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ handleStep2Submit }) => {
           setLoading(false);
         });
     } else {
-      setSuggestions([]); // Clear suggestions if input value is empty
+      setSuggestions([]); 
     }
   }, [inputValue]);
 

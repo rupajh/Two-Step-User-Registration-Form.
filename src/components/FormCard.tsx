@@ -1,15 +1,9 @@
 import React from 'react'
-import Box from '@mui/material/Box';
-// import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
-// import CardContent from '@mui/material/CardContent';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
 import { Card, CardContent, Typography, Grid } from '@material-ui/core';
 import '../style/Card.css'
 
 interface FormCardProps {
-  formContent: () => JSX.Element; // Define the type of formContent prop as a function that returns JSX.Element
+  formContent: () => JSX.Element; 
 }
 
 const FormCard: React.FC<FormCardProps> = ({formContent}) => {

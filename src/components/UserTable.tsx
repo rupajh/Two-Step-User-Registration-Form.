@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import $ from 'jquery';
 import 'datatables.net';
 import '../style/Table.css'
-import Button from '@mui/material/Button';
 
 interface UserTableProps {
   userlist: any;
@@ -12,7 +11,6 @@ const UserTable: React.FC<UserTableProps> = () => {
 
   const [dataTable, setDataTable] = useState<any>(null);
   const users = useSelector((state: any) => state.users);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!$.fn.DataTable.isDataTable('#userTable')) { 

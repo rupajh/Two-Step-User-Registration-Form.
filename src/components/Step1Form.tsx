@@ -2,8 +2,6 @@ import React from 'react';
 import { useForm, Controller, SubmitHandler, useWatch } from 'react-hook-form';
 import { TextField } from '@material-ui/core';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { addUser } from '../store/actions/userActions';
 import { ValidationError } from 'yup';
 import '../App.css'
 import { Button } from '@mui/material';
@@ -14,7 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FormCard from './FormCard';
 import '../style/Form.css'
-import { error } from 'console';
 const schema = yup.object().shape({
     name: yup.string().required('Name is required').min(3, 'Name must be at least 3 characters'),
     age: yup.number().typeError('Age must be a number').positive('Age must be a positive number').required('Age is required'),
@@ -39,7 +36,7 @@ interface FormValues {
     age?: number;
     sex?: string;
     mobile?: string;
-    govtIdType?: string; // Update type to match Yup schema
+    govtIdType?: string; 
     govtId?: string;
 }
 
@@ -59,7 +56,7 @@ const resolver = async (values: FormValues) => {
                 }, {}),
             };
         } else {
-            // Handle other types of errors
+           
             console.error('Validation error:', errors);
             return {
                 values: {},
@@ -91,7 +88,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ handleStep1Submit }) => {
         } else if (govtIdType === 'PAN') {
             return 'PAN Number';
         }
-        return 'Government ID *'; // Default label if none of the above matches
+        return 'Government ID *'; 
     };
 
     const formContent = () => {
@@ -114,7 +111,6 @@ const Step1Form: React.FC<Step1FormProps> = ({ handleStep1Submit }) => {
                             <Controller
                                 name="age"
                                 control={control}
-                                // defaultValue=""
                                 render={({ field }) => (
                                     <TextField {...field} type="number" label="Age *" error={!!errors.age} helperText={errors.age?.message} style={{ minWidth: 216 }} />
                                 )}
@@ -171,7 +167,6 @@ const Step1Form: React.FC<Step1FormProps> = ({ handleStep1Submit }) => {
                                             <MenuItem value="Aadhar">Aadhar</MenuItem>
                                             <MenuItem value="PAN">PAN</MenuItem>
                                         </Select>
-                                        {/* <FormHelperText>Government ID type is required</FormHelperText> */}
                                         {errors.govtIdType && <FormHelperText error>mobile must be a number</FormHelperText>}
 
                                     </FormControl>
