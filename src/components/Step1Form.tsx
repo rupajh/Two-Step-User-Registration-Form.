@@ -21,7 +21,7 @@ const schema = yup.object().shape({
     sex: yup.string().required('Sex is required').oneOf(['Male', 'Female'], 'Invalid sex value'),
     mobile: yup.string().matches(/^\d{10}$/, 'Invalid mobile number').required('Mobile number is required'),
     govtIdType: yup.string().oneOf(['Aadhar', 'PAN'], 'Invalid government ID type').required('Government ID type is required'),
-    govtId: yup.string().test('conditional-validation', 'Invalid government ID', function (value, { parent }) {
+    govtId: yup.string().required('This field is required').test('conditional-validation', 'Invalid government ID', function (value, { parent }) {
         const govtIdType = parent.govtIdType;
         if (!value) return true; // Skip validation if govtId is not provided
         if (govtIdType === 'Aadhar') {
@@ -144,16 +144,17 @@ const Step1Form: React.FC<Step1FormProps> = ({ handleStep1Submit }) => {
                                 )}
                             />
                         </div>
-
+                        <div>
                         <Controller
                             name="mobile"
                             control={control}
-                            defaultValue=""
+                            // defaultValue=""
                             render={({ field }) => (
                                 <TextField {...field} label="Mobile*" type='number' error={!!errors.mobile} helperText={errors.mobile?.message} style={{ minWidth: 216 }} />
                             )}
                         />
                         {errors.mobile && <FormHelperText error>mobile must be a number</FormHelperText>}
+                        </div>
 
                     </div>
                     <div className='d-flex'>
@@ -198,7 +199,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ handleStep1Submit }) => {
 
                     </div>
 
-                    <div className='d-flex content-center' style={{marginTop:"5rem"}}>
+                    <div className='d-flex content-center' style={{ marginTop: "5rem" }}>
 
                         <Button variant="contained" type='submit'>Next</Button>
 

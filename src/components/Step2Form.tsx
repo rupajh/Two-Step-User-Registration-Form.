@@ -152,35 +152,37 @@ const Step2Form: React.FC<Step2FormProps> = ({ handleStep2Submit }) => {
                 )}
               />
             </div>
+            <div>
+              <Controller
+                name="country"
+                control={control}
+                // defaultValue=""
+                render={({ field }) => (
+                  <div>
+                    <TextField
+                      {...field}
+                      label="Country*"
+                      error={!!errors.country}
+                      helperText={errors.country?.message}
+                      value={inputValue}
+                      onChange={handleChange}
+                      style={{ width: '216' }}
+                    />
+                    {suggestions?.length > 0 && (
+                      <div className='search-able-input'>
+                        {suggestions?.map((country, index) => (
+                          <MenuItem {...field} key={index} onClick={() => handleSelectCountry(country)}>
+                            {country}
+                          </MenuItem>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              />
+              {errors.country && <FormHelperText error>Country is required</FormHelperText>}
+            </div>
 
-            <Controller
-              name="country"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <div>
-                  <TextField
-                    {...field}
-                    label="Country"
-                    error={!!errors.country}
-                    helperText={errors.country?.message}
-                    value={inputValue}
-                    onChange={handleChange}
-                    style={{ width: '216' }}
-                  />
-                  {suggestions?.length > 0 && (
-                    <div className='search-able-input'>
-                      {suggestions?.map((country, index) => (
-                        <MenuItem key={index} onClick={() => handleSelectCountry(country)}>
-                          {country}
-                        </MenuItem>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            />
-                        {errors.country && <FormHelperText error>Country is required</FormHelperText>}
 
           </div>
           <div className=''>
@@ -199,7 +201,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ handleStep2Submit }) => {
 
           </div>
 
-          <div className='d-flex content-center' style={{marginTop:"5rem"}}>
+          <div className='d-flex content-center' style={{ marginTop: "5rem" }}>
 
             <Button variant="contained" type='submit'>Submit</Button>
 
