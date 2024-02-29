@@ -1,0 +1,28 @@
+.d-flex{
+    display: flex;
+}
+.m-r{
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+}
+.content-center{
+    justify-content: center;
+}
+.search-able-input{
+    position: absolute;
+    border: 1px solid;
+    height: 114px;
+    overflow: auto;
+    background: white;
+    z-index: 1;
+    width: 184px;
+}
+
+.log-out-btn{
+    display: flex;
+    justify-content: end;
+    padding-right: 25px;
+    padding-bottom: 50px;
+    padding-top: 25px;
+    background: aliceblue;
+}
